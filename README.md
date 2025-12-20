@@ -120,10 +120,6 @@ python -m playwright install chromium
   sudo apt-get update
   sudo apt-get install -y portaudio19-dev
   ```
-- **macOS**
-  ```bash
-  brew install portaudio
-  ```
 - **Windows**
   - If `pip install pyaudio` fails, install a compatible wheel or use `pipwin`:
     ```bash
@@ -215,22 +211,6 @@ Once `search_service.py` is running, the agent calls:
 If the service is down, you’ll see:
 - “Search service is not reachable. Start search_service.py and try again.”
 
----
-
-## 🔒 Security Checklist (Minimum for Production)
-
-If you plan to deploy this beyond localhost:
-
-- ✅ **Never commit `.env`**
-- ✅ **Rotate keys** if they were ever exposed
-- ✅ Use a real web server:
-  - `gunicorn` (Linux) / `waitress` (Windows)
-  - reverse proxy with **Nginx/Caddy**
-- ✅ Add **CORS policy** and **CSRF** protections where applicable
-- ✅ Enforce **upload limits** for audio files (size, content-type)
-- ✅ Add **request throttling** (per IP / per session)
-- ✅ Separate secrets using a secret manager (Vault / AWS Secrets Manager / etc.)
-- ✅ Add **structured logging** (no PII) + request IDs
 
 ---
 
@@ -264,9 +244,3 @@ Remove/replace them with real code before running in production.
 - 🧠 Retrieval-augmented generation (RAG) over official scheme PDFs
 - 🗣️ Multi-turn conversation memory with user consent
 - ✅ Test suite: `pytest` + integration tests for endpoints
-
----
-
-## 📜 License
-Add a license file if you plan to distribute this publicly.
-#
