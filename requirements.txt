@@ -1,0 +1,9 @@
+requests
+pyaudio
+python-dotenv
+webrtcvad
+chromadb
+groq
+flask
+openai
+playwright

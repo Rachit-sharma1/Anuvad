@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Voice Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+        .message.user {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .message.assistant {
+            background-color: #e9ecef;
+            color: black;
+        }
+        .input-container {
+            display: flex;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+        .mic-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mic-button.recording {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="chat-container" id="chat"></div>
+        <div class="input-container">
+            <button id="mic-button" class="mic-button">🎤</button>
+        </div>
+    </div>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+
+        const chat = document.getElementById('chat');
+        const micButton = document.getElementById('mic-button');
+
+        navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data);
+            };
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' }); // or wav if possible
+                audioChunks = [];
+                sendAudio(audioBlob);
+            };
+        });
+
+        micButton.addEventListener('click', () => {
+            if (isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+                micButton.classList.remove('recording');
+                micButton.textContent = '🎤';
+            } else {
+                audioChunks = [];
+                mediaRecorder.start();
+                isRecording = true;
+                micButton.classList.add('recording');
+                micButton.textContent = '⏹️';
+            }
+        });
+
+        function sendAudio(audioBlob) {
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'recording.webm');
+
+            fetch('/process_voice', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json()).then(data => {
+                if (data.error) {
+                    addMessage('assistant', 'Error: ' + data.error);
+                } else {
+                    if (data.user) {
+                        addMessage('user', data.user);
+                    }
+                    addMessage('assistant', data.response);
+                    if (data.audio) {
+                        const audio = new Audio('data:audio/wav;base64,' + data.audio);
+                        audio.play();
+                    }
+                }
+            }).catch(error => {
+                addMessage('assistant', 'Error: ' + error.message);
+            });
+        }
+
+        function addMessage(role, content) {
+            const msg = document.createElement('div');
+            msg.className = 'message ' + role;
+            msg.textContent = content;
+            chat.appendChild(msg);
+            chat.scrollTop = chat.scrollHeight;
+        }
+    </script>
+</body>
+</html>

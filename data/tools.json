@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "web_search",
+        "description": "Search the web for information",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {"type": "string", "description": "The search query"}
+          },
+          "required": ["query"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_file",
+        "description": "Create a new file with given content",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {"type": "string", "description": "File path"},
+            "content": {"type": "string", "description": "Content to write"}
+          },
+          "required": ["path", "content"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read content from a file",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {"type": "string", "description": "File path"}
+          },
+          "required": ["path"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "update_file",
+        "description": "Append content to a file",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {"type": "string", "description": "File path"},
+            "content": {"type": "string", "description": "Content to append"}
+          },
+          "required": ["path", "content"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "delete_file",
+        "description": "Delete a file",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {"type": "string", "description": "File path"}
+          },
+          "required": ["path"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "sequential_think",
+        "description": "Perform sequential thinking on a query for deeper analysis",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {"type": "string", "description": "The query to think about"}
+          },
+          "required": ["query"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "scheme_catalog_search",
+        "description": "Search and shortlist government/public welfare schemes relevant to the user's need.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {"type": "string"},
+            "language_code": {"type": "string"},
+            "max_results": {"type": "integer"}
+          },
+          "required": ["query"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "eligibility_check",
+        "description": "Check user eligibility for a specific scheme using a rules-based engine and return missing fields/reasons.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "scheme_id": {"type": "string"},
+            "profile": {"type": "object"}
+          },
+          "required": ["scheme_id", "profile"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "build_application_checklist",
+        "description": "Generate a document checklist for applying to a chosen scheme.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "scheme_id": {"type": "string"},
+            "profile": {"type": "object"}
+          },
+          "required": ["scheme_id", "profile"]
+        }
+      }
+    }
+  ]
+}

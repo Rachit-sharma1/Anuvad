@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "language_hint": "mr-IN",
+  "schemes": [
+    {
+      "id": "pm_kisan",
+      "name": "प्रधानमंत्री किसान सन्मान निधी (PM-KISAN)",
+      "description": "पात्र शेतकरी कुटुंबांना वार्षिक आर्थिक सहाय्य.",
+      "tags": ["शेतकरी", "कृषी", "आर्थिक सहाय्य"],
+      "required_fields": ["occupation", "state"],
+      "rules": {
+        "occupation_in": ["farmer", "शेतकरी"]
+      }
+    },
+    {
+      "id": "pmjay",
+      "name": "आयुष्मान भारत - प्रधानमंत्री जन आरोग्य योजना (PM-JAY)",
+      "description": "आरोग्य विमा/उपचार कव्हरेज (पात्र लाभार्थ्यांसाठी).",
+      "tags": ["आरोग्य", "विमा", "उपचार"],
+      "required_fields": ["state", "income_bracket"],
+      "rules": {
+        "income_bracket_any": ["low", "bpl", "अल्प", "बीपीएल"]
+      }
+    },
+    {
+      "id": "pmay",
+      "name": "प्रधानमंत्री आवास योजना (PMAY)",
+      "description": "घरकुल/घर बांधणीसाठी सहाय्य (शहरी/ग्रामीण).",
+      "tags": ["घरकुल", "गृहनिर्माण"],
+      "required_fields": ["state", "has_pucca_house"],
+      "rules": {
+        "has_pucca_house_not": ["yes", "होय", "आहे"]
+      }
+    },
+    {
+      "id": "ujjwala",
+      "name": "प्रधानमंत्री उज्ज्वला योजना (PMUY)",
+      "description": "एलपीजी कनेक्शन/सहाय्य (पात्र कुटुंबांसाठी).",
+      "tags": ["गॅस", "एलपीजी", "महिला"],
+      "required_fields": ["state", "gender"],
+      "rules": {
+        "notes": "ही योजना प्रामुख्याने महिलांसाठी असते; राज्य/कुटुंब निकष लागू होऊ शकतात."
+      }
+    },
+    {
+      "id": "old_age_pension",
+      "name": "वृद्धापकाळ पेन्शन (राज्यनिहाय)",
+      "description": "वृद्ध व्यक्तींसाठी मासिक पेन्शन (राज्यनिहाय नियम).",
+      "tags": ["पेन्शन", "वृद्ध", "सामाजिक सुरक्षा"],
+      "required_fields": ["age", "state"],
+      "rules": {
+        "min_age": 60
+      }
+    },
+    {
+      "id": "mgnrega",
+      "name": "मनरेगा (MGNREGA)",
+      "description": "ग्रामीण भागात रोजगार हमी आणि मजुरी.",
+      "tags": ["रोजगार", "ग्रामीण", "मजुरी"],
+      "required_fields": ["state", "rural"],
+      "rules": {
+        "rural_required": true
+      }
+    }
+  ]
+}
