@@ -77,38 +77,6 @@ This separation keeps the system **upgradeable**: you can swap search, LLM provi
 
 ---
 
-## 🔐 Environment Variables
-
-This repo currently contains a `.env`. **Do NOT commit real keys to git.**  
-Create a safe template file like `.env.example` and keep `.env` local.
-
-### `.env.example` (create this)
-
-```env
-# Sarvam AI
-SARVAM_API_KEY=your_sarvam_key_here
-BASE_URL=https://api.sarvam.ai
-
-# Sarvam Models
-TTS_MODEL=bulbul:v2
-STT_MODEL=saarika:v2.5
-TRANSLATE_MODEL=sarvam-translate:v1
-DEFAULT_SPEAKER=anushka
-RECORD_DURATION=5
-
-# LLM
-OPENAI_API_KEY=your_openai_key_here
-OPENAI_MODEL=gpt-4.1-nano-2025-04-14
-
-# Search microservice (optional)
-SEARCH_SERVICE_URL=http://127.0.0.1:5001/search
-SEARCH_SERVICE_PORT=5001
-SEARCH_SERVICE_TIMEOUT_SECONDS=25
-WEB_SEARCH_CACHE_TTL_SECONDS=900
-WEB_SEARCH_MIN_INTERVAL_SECONDS=2
-WEB_SEARCH_COOLDOWN_SECONDS=60
-```
-
 ---
 
 ## 🚀 Setup (Local)
@@ -301,5 +269,6 @@ Remove/replace them with real code before running in production.
 
 ## 📜 License
 Add a license file if you plan to distribute this publicly.
-#   A n u v a d  
+#   A n u v a d 
+ 
  
