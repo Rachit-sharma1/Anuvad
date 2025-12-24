@@ -211,31 +211,6 @@ Once `search_service.py` is running, the agent calls:
 If the service is down, you’ll see:
 - “Search service is not reachable. Start search_service.py and try again.”
 
-
----
-
-## 🧯 Troubleshooting
-
-### Playwright errors
-- Run:
-  ```bash
-  python -m playwright install chromium
-  ```
-- Ensure you can run headless Chromium in your environment (some servers need extra libs).
-
-### `pyaudio` install fails
-- Install PortAudio first (see setup section), then retry `pip install pyaudio`.
-
-### Search not working
-- Confirm `search_service.py` is running on the port in `SEARCH_SERVICE_URL`.
-- Try opening the search endpoint manually after starting the service.
-
-### “...” (ellipsis) in source files
-Some files contain literal `...` placeholder lines. Python/JS will not run with those in place.
-Remove/replace them with real code before running in production.
-
----
-
 ## 🛣️ Roadmap Ideas
 
 - 📦 Docker + docker-compose (app + search + optional vector DB)
